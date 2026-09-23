@@ -25,6 +25,32 @@ class ContractTests(unittest.TestCase):
         c = build_action_contract("Please explain git rebase")
         self.assertEqual(c.request_kind, "chat")
 
+
+    def test_german_wie_erstelle_is_chat(self) -> None:
+        for prompt in (
+            "Wie erstelle ich eine Datei?",
+            "Wie erzeuge ich eine Datei?",
+            "Wie baue ich ein Skript?",
+            "Wie schreibe ich eine Datei?",
+        ):
+            with self.subTest(prompt=prompt):
+                c = build_action_contract(prompt)
+                self.assertEqual(c.request_kind, "chat", prompt)
+                self.assertFalse(c.requires_write, prompt)
+
+    def test_german_imperative_create_still_action(self) -> None:
+        """Success/action cases must stay action after question-regex tweak."""
+        for prompt in (
+            "Erstell die Datei src/app.py im Projekt",
+            "Erzeuge die Datei hello.py",
+            "Schreibe die Datei notes.md",
+            "Baue ein Skript tools/run.py",
+            "Create the file src/app.py in this project",
+        ):
+            with self.subTest(prompt=prompt):
+                c = build_action_contract(prompt)
+                self.assertEqual(c.request_kind, "action", prompt)
+
     def test_write_request_detected_en_and_de(self) -> None:
         en = build_action_contract("Create the file src/app.py in this project")
         de = build_action_contract("Erstell die Datei src/app.py im Projekt")

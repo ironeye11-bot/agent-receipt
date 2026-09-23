@@ -51,7 +51,7 @@ stricter proof.
 `--rewrite` prints only the corrected reply so you can drop it into a hook:
 
 ```bash
-agent-receipt-check --ask "$PROMPT" --reply "$ANSWER" --dir "$PWD" --rewrite
+agent-receipt-check --ask "$PROMPT" --reply "$ANSWER" --dir ./out --rewrite
 ```
 
 ### Ledger JSON

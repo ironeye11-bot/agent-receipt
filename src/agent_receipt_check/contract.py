@@ -27,7 +27,7 @@ _QUESTION_RE = re.compile(
     r"why\s+(?:is|are|do|does|can)\b|when\s+(?:do|does|should|is)\b|"
     r"where\s+(?:do|does|is|can)\b|who\s+(?:is|are|can)\b|"
     r"can\s+you\s+explain\b|could\s+you\s+explain\b|please\s+explain\b|"
-    r"wie\s+(?:kann|mache|mach|geht|funktioniert)\b|was\s+(?:ist|sind|bedeutet)\b|"
+    r"wie\s+(?:kann|mache|mach|geht|funktioniert|erstelle|erzeuge|baue|schreibe)\b|was\s+(?:ist|sind|bedeutet)\b|"
     r"warum\b|wieso\b|erklaere?\b|beschreib\w*)|"
     r"\b(?:explain|describe)\b)"
 )
