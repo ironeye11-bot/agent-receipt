@@ -115,6 +115,29 @@ class VerdictTests(unittest.TestCase):
         self.assertTrue(receipt.ok)
 
 
+
+class SuccessClaimCases(unittest.TestCase):
+    """Minimal regex cases: success vs honest failure."""
+
+    def test_case1_done_fixed_error_is_success(self) -> None:
+        self.assertTrue(has_success_claim("Done. I fixed the error."))
+
+    def test_case2_lone_error_is_not_success(self) -> None:
+        self.assertFalse(has_success_claim("error"))
+
+    def test_case3_done_plus_bare_error_still_success(self) -> None:
+        self.assertTrue(has_success_claim("Done. Error: disk full."))
+
+    def test_case4_could_not_write_not_success(self) -> None:
+        self.assertFalse(has_success_claim("I could not write the file."))
+
+    def test_case5_datei_nicht_erstellt_not_success(self) -> None:
+        self.assertFalse(has_success_claim("Datei nicht erstellt."))
+
+    def test_case6_done_could_not_cancels(self) -> None:
+        self.assertFalse(has_success_claim("Done. I could not write the file."))
+
+
 class WorkspaceTests(unittest.TestCase):
     def test_directory_counts_as_write(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
