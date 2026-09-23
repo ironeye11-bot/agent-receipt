@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="400" viewBox="0 0 980 400" role="img" aria-label="agent-receipt terminal">
+  <rect width="980" height="400" rx="16" fill="#12070f"/>
+  <rect width="980" height="42" rx="16" fill="#1d1018"/>
+  <circle cx="28" cy="21" r="7" fill="#ff6b4a"/>
+  <circle cx="52" cy="21" r="7" fill="#ffd36a"/>
+  <circle cx="76" cy="21" r="7" fill="#7af0ff"/>
+  <text x="110" y="27" fill="#c9b4ae" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14">agent-receipt</text>
+  <text x="28" y="92" fill="#ffd36a" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="16">$ agent-receipt --ask "Create src/app.py" --reply "Done. Created."</text>
+  <text x="28" y="132" fill="#ff6b4a" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="18">FAIL  kind=action  claimed_success=True</text>
+  <text x="28" y="166" fill="#f6e6df" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="18">gaps: no_write</text>
+  <text x="28" y="200" fill="#f6e6df" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="18">rewrite:</text>
+  <text x="28" y="234" fill="#ffd36a" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="18">Not done. Receipt is missing: no successful write.</text>
+  <text x="28" y="300" fill="#7af0ff" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="16">$ agent-receipt --ask "Create src/app.py" --reply "Done." --dir ./src</text>
+  <text x="28" y="340" fill="#b8ffce" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="18">PASS  kind=action  claimed_success=True</text>
+</svg>
