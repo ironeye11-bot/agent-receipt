@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "agent-receipt"
+name = "agent-receipt-check"
 version = "1.0.1"
 description = "Reject 'done' from an AI agent when no file or tool evidence exists."
 readme = "README.md"
@@ -24,11 +24,11 @@ classifiers = [
 dependencies = []
 
 [project.scripts]
-agent-receipt = "agent_receipt.cli:main"
+agent-receipt-check = "agent_receipt_check.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/ironeye11-bot/agent-receipt"
-Issues = "https://github.com/ironeye11-bot/agent-receipt/issues"
+Homepage = "https://github.com/ironeye11-bot/agent-receipt-check"
+Issues = "https://github.com/ironeye11-bot/agent-receipt-check/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]

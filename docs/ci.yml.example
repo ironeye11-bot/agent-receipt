@@ -38,7 +38,7 @@ jobs:
           python -m build
       - name: Smoke wheel
         run: |
-          python -m venv /tmp/agent-receipt-smoke
-          /tmp/agent-receipt-smoke/bin/pip install dist/*.whl
-          /tmp/agent-receipt-smoke/bin/agent-receipt --version
-          /tmp/agent-receipt-smoke/bin/agent-receipt --help
+          python -m venv /tmp/agent-receipt-check-smoke
+          /tmp/agent-receipt-check-smoke/bin/pip install dist/*.whl
+          /tmp/agent-receipt-check-smoke/bin/agent-receipt-check --version
+          /tmp/agent-receipt-check-smoke/bin/agent-receipt-check --help

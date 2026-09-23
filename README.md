@@ -1,4 +1,4 @@
-# Agent Receipt
+# Agent Receipt Check
 
 Block an agent's "done" when no file is there.
 
@@ -9,12 +9,12 @@ Block an agent's "done" when no file is there.
   <img src="docs/hero.jpg" alt="product photo" width="100%">
 </p>
 <p align="center">
-  <img src="docs/hero.svg" alt="Agent Receipt" width="100%">
+  <img src="docs/hero.svg" alt="Agent Receipt Check" width="100%">
 </p>
 
 Local coding agents say **done**. Then the folder is empty.
 
-Agent Receipt takes the user request, the model reply, and either a workspace directory or a JSON ledger. If the reply claims success and the evidence is missing, the reply is rewritten.
+Agent Receipt Check takes the user request, the model reply, and either a workspace directory or a JSON ledger. If the reply claims success and the evidence is missing, the reply is rewritten.
 
 No cloud. No model. No telemetry.
 
@@ -25,19 +25,19 @@ No cloud. No model. No telemetry.
 ## Install
 
 ```bash
-pip install git+https://github.com/ironeye11-bot/agent-receipt.git
+pip install git+https://github.com/ironeye11-bot/agent-receipt-check.git
 ```
 
 ## Use
 
 ```bash
-agent-receipt --ask "Create src/app.py in this project" --reply "Done. File created."
+agent-receipt-check --ask "Create src/app.py in this project" --reply "Done. File created."
 # FAIL  gaps: no_write
 
-agent-receipt --ask "Create src/app.py in this project" --reply "Done." --dir ./src
+agent-receipt-check --ask "Create src/app.py in this project" --reply "Done." --dir ./src
 # PASS if ./src actually contains a file
 
-agent-receipt --ask "Format the repo" --reply "Done." --ledger ledger.json --require-tool prettier
+agent-receipt-check --ask "Format the repo" --reply "Done." --ledger ledger.json --require-tool prettier
 ```
 
 ### `--dir` is presence evidence
@@ -51,7 +51,7 @@ stricter proof.
 `--rewrite` prints only the corrected reply so you can drop it into a hook:
 
 ```bash
-agent-receipt --ask "$PROMPT" --reply "$ANSWER" --dir "$PWD" --rewrite
+agent-receipt-check --ask "$PROMPT" --reply "$ANSWER" --dir "$PWD" --rewrite
 ```
 
 ### Ledger JSON
@@ -69,7 +69,7 @@ agent-receipt --ask "$PROMPT" --reply "$ANSWER" --dir "$PWD" --rewrite
 ## Library
 
 ```python
-from agent_receipt import ExecutionLedger, inspect
+from agent_receipt_check import ExecutionLedger, inspect
 
 receipt = inspect(
     "Create hello.py in this folder",

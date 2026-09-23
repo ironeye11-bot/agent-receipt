@@ -27,5 +27,5 @@
   </g>
   <text x="72" y="230" fill="#fff4ee" font-family="ui-sans-serif, system-ui, Segoe UI, sans-serif" font-size="64" font-weight="700">Agent Receipt</text>
   <text x="72" y="300" fill="#ffd36a" font-family="ui-sans-serif, system-ui, Segoe UI, sans-serif" font-size="30">If the file is not there, it is not done.</text>
-  <text x="72" y="372" fill="#c9b4ae" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20">agent-receipt --ask "..." --reply "Done." --dir ./out</text>
+  <text x="72" y="372" fill="#c9b4ae" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20">agent-receipt-check --ask "..." --reply "Done." --dir ./out</text>
 </svg>

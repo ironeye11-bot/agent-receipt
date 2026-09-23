@@ -7,7 +7,7 @@ import json
 import sys
 from pathlib import Path
 
-from agent_receipt import __version__, inspect, ledger_from_dict, ledger_from_workspace
+from agent_receipt_check import __version__, inspect, ledger_from_dict, ledger_from_workspace
 
 
 def _load_json(path: Path) -> dict:
@@ -16,10 +16,10 @@ def _load_json(path: Path) -> dict:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        prog="agent-receipt",
+        prog="agent-receipt-check",
         description="Reject 'done' from an agent when no file or tool evidence exists.",
     )
-    parser.add_argument("--version", action="version", version=f"agent-receipt {__version__}")
+    parser.add_argument("--version", action="version", version=f"agent-receipt-check {__version__}")
     parser.add_argument("--ask", required=True, help="original user request")
     parser.add_argument("--reply", required=True, help="model reply to check")
     parser.add_argument("--dir", type=Path, help="workspace folder that should contain new files")

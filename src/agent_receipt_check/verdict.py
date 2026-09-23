@@ -5,9 +5,9 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 
-from agent_receipt.contract import ActionContract
-from agent_receipt.ledger import ExecutionLedger
-from agent_receipt.text import fold
+from agent_receipt_check.contract import ActionContract
+from agent_receipt_check.ledger import ExecutionLedger
+from agent_receipt_check.text import fold
 
 _SUCCESS_CLAIM_RE = re.compile(
     r"(?i)\b(?:fertig|erledigt|success|pass|done|abgeschlossen|aktualisiert|updated|"
@@ -99,7 +99,7 @@ def _rewrite(answer: str, gaps: list[str]) -> str:
 
 
 def inspect(prompt: str, answer: str, ledger: ExecutionLedger, required_tools: list[str] | None = None) -> Receipt:
-    from agent_receipt.contract import build_action_contract
+    from agent_receipt_check.contract import build_action_contract
 
     contract = build_action_contract(prompt, required_tools)
     gaps = completion_gaps(contract, ledger)

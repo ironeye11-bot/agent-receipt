@@ -4,10 +4,10 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from agent_receipt.cli import main
-from agent_receipt.contract import build_action_contract
-from agent_receipt.ledger import ExecutionLedger, ledger_from_workspace
-from agent_receipt.verdict import enforce, has_success_claim, inspect
+from agent_receipt_check.cli import main
+from agent_receipt_check.contract import build_action_contract
+from agent_receipt_check.ledger import ExecutionLedger, ledger_from_workspace
+from agent_receipt_check.verdict import enforce, has_success_claim, inspect
 
 
 class ContractTests(unittest.TestCase):

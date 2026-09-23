@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 
-from agent_receipt.text import fold
+from agent_receipt_check.text import fold
 
 _ACTION_RE = re.compile(
     r"(?i)\b(?:mach|mache|macht|erstell|erzeuge|generier|aender|ander|update|aktualisier|"
