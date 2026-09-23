@@ -1,5 +1,7 @@
 # Agent Receipt
 
+Fertig vom Agenten blocken, wenn keine Datei da ist.
+
 <p align="center">
   <img src="docs/hero.jpg" alt="product photo" width="100%">
 </p>
