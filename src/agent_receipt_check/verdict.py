@@ -19,7 +19,8 @@ _SUCCESS_CLAIM_RE = re.compile(
 _FAILURE_WORD_RE = re.compile(
     r"(?i)\b(?:nicht\s+fertig|fehlgeschlagen|konnte\s+nicht|unavailable|"
     r"nicht\s+verfuegbar|could\s+not|failed\s+to|i\s+failed|"
-    r"nicht\s+erstellt|not\s+created|unable\s+to)\b"
+    r"nicht\s+erstellt|nicht\s+gespeichert|nicht\s+geschrieben|"
+    r"not\s+created|not\s+saved|not\s+written|unable\s+to)\b"
 )
 
 _LABELS = {

@@ -23,13 +23,13 @@ _VERIFY_RE = re.compile(
 )
 # How-to / what-is questions stay chat even if an action verb appears.
 _QUESTION_RE = re.compile(
-    r"(?i)(?:^\s*(?:how\s+(?:do|can|would|should|to)\b|what\s+(?:is|are|does|do)\b|"
+    r"(?i)^\s*(?:how\s+(?:do|can|would|should|to)\b|what\s+(?:is|are|does|do)\b|"
     r"why\s+(?:is|are|do|does|can)\b|when\s+(?:do|does|should|is)\b|"
     r"where\s+(?:do|does|is|can)\b|who\s+(?:is|are|can)\b|"
     r"can\s+you\s+explain\b|could\s+you\s+explain\b|please\s+explain\b|"
+    r"(?:explain|describe)\b|"
     r"wie\s+(?:kann|mache|mach|geht|funktioniert|erstelle|erzeuge|baue|schreibe)\b|was\s+(?:ist|sind|bedeutet)\b|"
-    r"warum\b|wieso\b|erklaere?\b|beschreib\w*)|"
-    r"\b(?:explain|describe)\b)"
+    r"warum\b|wieso\b|erklaere?\b|beschreib\w*)"
 )
 _IMAGE_WORD = r"\b\w*(?:bild|bilder|foto|fotos|image|images|grafik|grafiken|screenshot)\b"
 _IMAGE_RE = re.compile(rf"(?i){_IMAGE_WORD}")

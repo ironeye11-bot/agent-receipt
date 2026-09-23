@@ -25,6 +25,31 @@ class ContractTests(unittest.TestCase):
         c = build_action_contract("Please explain git rebase")
         self.assertEqual(c.request_kind, "chat")
 
+    def test_action_before_explain_stays_action(self) -> None:
+        """Leading imperative wins; explain/describe later stays action."""
+        for prompt in (
+            "Create hello.py",
+            "Create hello.py and explain what you did.",
+            "Write app.py and describe the changes.",
+            "Erstelle hello.py und erkläre danach kurz was du gemacht hast.",
+            "Schreibe app.py und beschreibe die Änderung.",
+        ):
+            with self.subTest(prompt=prompt):
+                c = build_action_contract(prompt)
+                self.assertEqual(c.request_kind, "action", prompt)
+
+    def test_explain_howto_stays_chat(self) -> None:
+        for prompt in (
+            "Explain how to create hello.py",
+            "How do I create hello.py?",
+            "Wie erstelle ich eine Datei?",
+            "Please explain how git rebase works.",
+        ):
+            with self.subTest(prompt=prompt):
+                c = build_action_contract(prompt)
+                self.assertEqual(c.request_kind, "chat", prompt)
+
+
 
     def test_german_wie_erstelle_is_chat(self) -> None:
         for prompt in (
@@ -162,6 +187,33 @@ class SuccessClaimCases(unittest.TestCase):
 
     def test_case6_done_could_not_cancels(self) -> None:
         self.assertFalse(has_success_claim("Done. I could not write the file."))
+
+    def test_negation_phrases_are_not_success(self) -> None:
+        for text in (
+            "Done. File not saved.",
+            "File was not written.",
+            "File was not created.",
+            "I could not save the file.",
+            "I could not write the file.",
+            "Datei nicht gespeichert.",
+            "Datei nicht geschrieben.",
+            "Datei nicht erstellt.",
+            "Konnte die Datei nicht speichern.",
+            "Konnte die Datei nicht schreiben.",
+        ):
+            with self.subTest(text=text):
+                self.assertFalse(has_success_claim(text), text)
+
+    def test_success_phrases_remain_success(self) -> None:
+        for text in (
+            "Done. File created.",
+            "Done. I fixed the error.",
+            "Fixed the error.",
+            "Fertig, Datei erstellt.",
+            "Done. Error: disk full.",
+        ):
+            with self.subTest(text=text):
+                self.assertTrue(has_success_claim(text), text)
 
 
 class WorkspaceTests(unittest.TestCase):
