@@ -10,16 +10,26 @@ from agent_receipt.text import fold
 _ACTION_RE = re.compile(
     r"(?i)\b(?:mach|mache|macht|erstell|erzeuge|generier|aender|ander|update|aktualisier|"
     r"oeffne|offne|pruef|pruf|suche|such|bau|schreib|speicher|kopier|lade|installier|"
-    r"reparier|fix|starte|create|generate|update|edit|open|check|search|build|write|"
-    r"save|copy|download|install|repair|start|add|delete|remove|implement|refactor)\w*\b"
+    r"reparier|fix|starte|formatier|create|generate|update|edit|open|check|search|build|write|"
+    r"save|copy|download|install|repair|start|add|delete|remove|implement|refactor|format)\w*\b"
 )
 _WRITE_RE = re.compile(
     r"(?i)\b(?:mach|erstell|erzeug|generier|aender|ander|update|aktualisier|bau|schreib|"
-    r"speicher|kopier|installier|reparier|fix|create|generate|update|edit|build|write|"
-    r"save|copy|install|repair|add|delete|remove|implement|refactor)\w*\b"
+    r"speicher|kopier|installier|reparier|fix|formatier|create|generate|update|edit|build|write|"
+    r"save|copy|install|repair|add|delete|remove|implement|refactor|format)\w*\b"
 )
 _VERIFY_RE = re.compile(
     r"(?i)\b(?:pruef|pruf|test|verify|check|kontrollier|validier)\w*\b"
+)
+# How-to / what-is questions stay chat even if an action verb appears.
+_QUESTION_RE = re.compile(
+    r"(?i)(?:^\s*(?:how\s+(?:do|can|would|should|to)\b|what\s+(?:is|are|does|do)\b|"
+    r"why\s+(?:is|are|do|does|can)\b|when\s+(?:do|does|should|is)\b|"
+    r"where\s+(?:do|does|is|can)\b|who\s+(?:is|are|can)\b|"
+    r"can\s+you\s+explain\b|could\s+you\s+explain\b|please\s+explain\b|"
+    r"wie\s+(?:kann|mache|mach|geht|funktioniert)\b|was\s+(?:ist|sind|bedeutet)\b|"
+    r"warum\b|wieso\b|erklaere?\b|beschreib\w*)|"
+    r"\b(?:explain|describe)\b)"
 )
 _IMAGE_WORD = r"\b\w*(?:bild|bilder|foto|fotos|image|images|grafik|grafiken|screenshot)\b"
 _IMAGE_RE = re.compile(rf"(?i){_IMAGE_WORD}")
@@ -59,9 +69,10 @@ class ActionContract:
 
 def build_action_contract(prompt: str, required_tools: list[str] | None = None) -> ActionContract:
     folded = fold(prompt)
-    is_action = bool(_ACTION_RE.search(folded))
+    looks_like_question = bool(_QUESTION_RE.search(folded))
+    is_action = bool(_ACTION_RE.search(folded)) and not looks_like_question
     image_work = bool(_IMAGE_RE.search(folded)) and is_action
-    generated_image = bool(_IMAGE_GENERATE_RE.search(folded))
+    generated_image = bool(_IMAGE_GENERATE_RE.search(folded)) and is_action
     requires_write = is_action and bool(_WRITE_RE.search(folded)) and bool(_ARTIFACT_RE.search(folded))
     requires_verify = is_action and bool(_VERIFY_RE.search(folded))
     tools = tuple(

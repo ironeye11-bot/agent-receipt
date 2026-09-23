@@ -14,9 +14,12 @@ _SUCCESS_CLAIM_RE = re.compile(
     r"erstellt|created|erzeugt|generated|geschrieben|written|gespeichert|saved|"
     r"geoeffnet|implementiert|implemented|fixed|repaired)\b"
 )
+# Clear task failure only — bare "error" / "failed" must NOT cancel a Done claim
+# (agents often say "Done. Error: …" while still claiming success).
 _FAILURE_WORD_RE = re.compile(
     r"(?i)\b(?:nicht\s+fertig|fehlgeschlagen|konnte\s+nicht|unavailable|"
-    r"nicht\s+verfuegbar|failed|error)\b"
+    r"nicht\s+verfuegbar|could\s+not|failed\s+to|i\s+failed|"
+    r"nicht\s+erstellt|not\s+created|unable\s+to)\b"
 )
 
 _LABELS = {
@@ -47,8 +50,17 @@ class Receipt:
 
 
 def has_success_claim(answer: str) -> bool:
+    """True when the reply claims the work is done.
+
+    "Done" plus a bare "error" still counts as a success claim. Only clear
+    negations ("could not", "failed to", "nicht fertig") cancel it.
+    """
     folded = fold(answer)
-    return bool(_SUCCESS_CLAIM_RE.search(folded)) and not bool(_FAILURE_WORD_RE.search(folded))
+    if not _SUCCESS_CLAIM_RE.search(folded):
+        return False
+    if _FAILURE_WORD_RE.search(folded):
+        return False
+    return True
 
 
 def completion_gaps(contract: ActionContract, ledger: ExecutionLedger) -> list[str]:

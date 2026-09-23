@@ -1,6 +1,6 @@
 # Agent Receipt
 
-Fertig vom Agenten blocken, wenn keine Datei da ist.
+Block an agent's "done" when no file is there.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
@@ -40,6 +40,14 @@ agent-receipt --ask "Create src/app.py in this project" --reply "Done." --dir ./
 agent-receipt --ask "Format the repo" --reply "Done." --ledger ledger.json --require-tool prettier
 ```
 
+### `--dir` is presence evidence
+
+`--dir` counts **existing** files under that folder as write evidence. It does not
+diff against a before-state, does not know which process created the files, and
+does not prove the agent wrote them in this turn. Pre-existing files make a
+false PASS possible. Prefer a JSON `--ledger` from your harness when you need
+stricter proof.
+
 `--rewrite` prints only the corrected reply so you can drop it into a hook:
 
 ```bash
@@ -77,7 +85,7 @@ German and English requests are both understood. Agent names from any stack are 
 ## Tests
 
 ```bash
-python -m unittest discover -s tests -v
+python3 -m unittest discover -s tests -v
 ```
 
 ## License
