@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-receipt"
+version = "1.0.0"
+description = "Reject 'done' from an AI agent when no file or tool evidence exists."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "ironeye11-bot" }]
+keywords = ["llm", "agent", "evaluation", "cli", "local-ai"]
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+]
+dependencies = []
+
+[project.scripts]
+agent-receipt = "agent_receipt.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/ironeye11-bot/agent-receipt"
+Issues = "https://github.com/ironeye11-bot/agent-receipt/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
